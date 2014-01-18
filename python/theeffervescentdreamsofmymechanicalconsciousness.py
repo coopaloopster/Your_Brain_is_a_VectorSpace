@@ -9,11 +9,14 @@ sizes = [4, 3, 3]
 biases = [np.random.randn(y, 1) for y in sizes[1:]]
 weights = [np.random.randn(y, x) for x, y in zip(sizes[:-1], sizes[1:])]
 
-hidden = np.asarray([sig(np.dot(weights[0][i],data['training_data'][0][:-1])+biases[0][i,0])
-    for i in xrange(len(weights[0]))])
+# The first flower
 
-result = np.asarray([sig(np.dot(weights[1][i],hidden) + biases[1][i,0]) for i in
-    xrange(len(weights[1]))])
+hidden = np.asarray([sig(np.dot(w0, data['training_data'][0][:-1]) +
+    biases[0][i, 0]) for i, w0  in enumerate(weights[0])])
 
-#print(feedforward)
-print(result)
+result = np.asarray([sig(np.dot(w1, hidden) +
+    biases[1][i, 0]) for i, w1 in enumerate(weights[1])])
+
+#print(result)
+Cost = 0.5 * np.linalg.norm(result - data['training_data'][0][4]) ** 2
+#print(Cost)
