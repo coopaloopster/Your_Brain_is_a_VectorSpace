@@ -17,4 +17,6 @@ hidden = np.asarray([sig(np.dot(w0, data['training_data'][0][:-1]) +
 result = np.asarray([sig(np.dot(w1, hidden) +
     biases[1][i, 0]) for i, w1 in enumerate(weights[1])])
 
-print(result)
+#print(result)
+Cost = 0.5 * np.linalg.norm(result - data['training_data'][0][4]) ** 2
+#print(Cost)
